@@ -13,7 +13,34 @@ class LoginPage extends StatelessWidget {
   }
 
   _body() {
-    Container(
+    return Container(
+      padding: EdgeInsets.all(16),
+      child: ListView(
+        children: [
+          Text("Login"),
+          TextField(),
+          SizedBox(
+            height: 20,
+          ),
+          Text("Senha"),
+          TextFormField(
+            obscureText: true,
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            height: 46,
+            child: ElevatedButton(
+              onPressed: () {},
+              child: Text(
+                "Login",
+                style: TextStyle(fontSize: 22),
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
