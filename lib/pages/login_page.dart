@@ -17,36 +17,41 @@ class LoginPage extends StatelessWidget {
       padding: EdgeInsets.all(16),
       child: ListView(
         children: [
-          TextFormField(
-            decoration: InputDecoration(
-              labelText: "Login",
-              hintText: "Digite o login",
-            ),
-          ),
+          _text("Login", "Digite o login"),
           SizedBox(
             height: 20,
           ),
-          TextFormField(
-            decoration: InputDecoration(
-              labelText: "Senha",
-              hintText: "Digite a senha",
-            ),
-            obscureText: true,
-          ),
+          _text("Senha", "Digite a senha", password: true),
+          // passando parametro para o named argument
           SizedBox(
             height: 20,
           ),
-          Container(
-            height: 46,
-            child: ElevatedButton(
-              onPressed: () {},
-              child: Text(
-                "Login",
-                style: TextStyle(fontSize: 22),
-              ),
-            ),
-          )
+          _button("Login")
         ],
+      ),
+    );
+  }
+
+  _button(String text) {
+    return Container(
+      height: 46,
+      child: ElevatedButton(
+        onPressed: () {},
+        child: Text(
+          text,
+          style: TextStyle(fontSize: 22),
+        ),
+      ),
+    );
+  }
+
+  _text(String label, String hint, {bool password = false}) {
+    //Named Argument
+    return TextFormField(
+      obscureText: password,
+      decoration: InputDecoration(
+        labelText: label,
+        hintText: hint,
       ),
     );
   }
