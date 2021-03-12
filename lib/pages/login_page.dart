@@ -1,3 +1,5 @@
+import 'package:carros/widgets/app_button.dart';
+import 'package:carros/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
@@ -24,7 +26,7 @@ class LoginPage extends StatelessWidget {
         padding: EdgeInsets.all(16),
         child: ListView(
           children: [
-            _text(
+            AppText(
               context,
               "Login",
               "Digite o login",
@@ -37,7 +39,7 @@ class LoginPage extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            _text(
+            AppText(
               context,
               "Senha",
               "Digite a senha",
@@ -51,7 +53,10 @@ class LoginPage extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            _button("Login", _onClickLogin)
+            AppButton(
+              "Login",
+              onPressed: _onClickLogin,
+            )
           ],
         ),
       ),
@@ -71,36 +76,7 @@ class LoginPage extends StatelessWidget {
     FocusNode nextFocus,
   }) {
     //Named Argument
-    return TextFormField(
-      controller: controller,
-      obscureText: password,
-      validator: validator,
-      keyboardType: keyboardType,
-      textInputAction: textInputAction,
-      focusNode: focusNode,
-      onFieldSubmitted: (String text) {
-        if (nextFocus != null) {
-          FocusScope.of(context).requestFocus(_focusSenha);
-        }
-      },
-      decoration: InputDecoration(
-        labelText: label,
-        hintText: hint,
-      ),
-    );
-  }
 
-  _button(String text, Function onPressed) {
-    return Container(
-      height: 46,
-      child: ElevatedButton(
-        onPressed: onPressed,
-        child: Text(
-          text,
-          style: TextStyle(fontSize: 22),
-        ),
-      ),
-    );
   }
 
   _onClickLogin() {
