@@ -4,6 +4,7 @@ class LoginPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final _tLogin = TextEditingController(); // Um controlador para cada campo
   final _tSenha = TextEditingController();
+  final _focusSenha = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -12,11 +13,11 @@ class LoginPage extends StatelessWidget {
         centerTitle: true,
         title: Text("Carros"),
       ),
-      body: _body(),
+      body: _body(context),
     );
   }
 
-  _body() {
+  _body(context) {
     return Form(
       key: _formKey, // mantem o estado do formulario
       child: Container(
@@ -24,20 +25,27 @@ class LoginPage extends StatelessWidget {
         child: ListView(
           children: [
             _text(
+              context,
               "Login",
               "Digite o login",
               controller: _tLogin,
               validator: _validadeLogin,
+              keyboardType: TextInputType.emailAddress,
+              textInputAction: TextInputAction.next,
+              nextFocus: _focusSenha,
             ),
             SizedBox(
               height: 20,
             ),
             _text(
+              context,
               "Senha",
               "Digite a senha",
               password: true,
               controller: _tSenha,
               validator: _validadeSenha,
+              keyboardType: TextInputType.number,
+              focusNode: _focusSenha,
             ),
             // passando parametro para o named argument
             SizedBox(
@@ -51,17 +59,30 @@ class LoginPage extends StatelessWidget {
   }
 
   _text(
+    BuildContext context,
     String label,
     String hint, {
     bool password = false,
     TextEditingController controller,
     FormFieldValidator<String> validator,
+    TextInputType keyboardType,
+    TextInputAction textInputAction,
+    FocusNode focusNode,
+    FocusNode nextFocus,
   }) {
     //Named Argument
     return TextFormField(
       controller: controller,
       obscureText: password,
       validator: validator,
+      keyboardType: keyboardType,
+      textInputAction: textInputAction,
+      focusNode: focusNode,
+      onFieldSubmitted: (String text) {
+        if (nextFocus != null) {
+          FocusScope.of(context).requestFocus(_focusSenha);
+        }
+      },
       decoration: InputDecoration(
         labelText: label,
         hintText: hint,
@@ -107,7 +128,7 @@ class LoginPage extends StatelessWidget {
     if (text.isEmpty) {
       return "Digite a senha";
     }
-    if(text.length < 3){
+    if (text.length < 3) {
       return "A senha precisa conter pelo menos 3 dígitos";
     }
     return null;
