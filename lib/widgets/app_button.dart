@@ -1,8 +1,8 @@
+
 import 'package:flutter/material.dart';
 
 class AppButton extends StatelessWidget {
   String text;
-
   Function onPressed;
 
   AppButton(this.text, {this.onPressed});
@@ -11,12 +11,16 @@ class AppButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 46,
-      child: ElevatedButton(
-        onPressed: onPressed,
+      child: RaisedButton(
+        color: Colors.blue,
         child: Text(
           text,
-          style: TextStyle(fontSize: 22),
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 22,
+          ),
         ),
+        onPressed: onPressed,
       ),
     );
   }

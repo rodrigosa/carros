@@ -1,112 +1,109 @@
+import 'package:carros/pages/home_page.dart';
+import 'package:carros/utils/nav.dart';
 import 'package:carros/widgets/app_button.dart';
 import 'package:carros/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-  final _tLogin = TextEditingController(); // Um controlador para cada campo
-  final _tSenha = TextEditingController();
+
+  final _tLogin = TextEditingController(text: "rodrigo");
+
+  final _tSenha = TextEditingController(text: "123");
+
   final _focusSenha = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         title: Text("Carros"),
       ),
-      body: _body(context),
+      body: _body(),
     );
   }
 
-  _body(context) {
+  _body() {
     return Form(
-      key: _formKey, // mantem o estado do formulario
+      key: _formKey,
       child: Container(
         padding: EdgeInsets.all(16),
         child: ListView(
-          children: [
+          children: <Widget>[
             AppText(
-              context,
               "Login",
               "Digite o login",
               controller: _tLogin,
-              validator: _validadeLogin,
+              validator: _validateLogin,
               keyboardType: TextInputType.emailAddress,
               textInputAction: TextInputAction.next,
               nextFocus: _focusSenha,
             ),
-            SizedBox(
-              height: 20,
-            ),
+            SizedBox(height: 10),
             AppText(
-              context,
               "Senha",
               "Digite a senha",
-              password: true,
               controller: _tSenha,
-              validator: _validadeSenha,
+              password: true,
+              validator: _validateSenha,
               keyboardType: TextInputType.number,
               focusNode: _focusSenha,
             ),
-            // passando parametro para o named argument
             SizedBox(
               height: 20,
             ),
             AppButton(
               "Login",
               onPressed: _onClickLogin,
-            )
+            ),
           ],
         ),
       ),
     );
   }
 
-  _text(
-    BuildContext context,
-    String label,
-    String hint, {
-    bool password = false,
-    TextEditingController controller,
-    FormFieldValidator<String> validator,
-    TextInputType keyboardType,
-    TextInputAction textInputAction,
-    FocusNode focusNode,
-    FocusNode nextFocus,
-  }) {
-    //Named Argument
-
-  }
-
-  _onClickLogin() {
-    bool formOK = _formKey.currentState.validate();
-    if (!formOK) {
+  void _onClickLogin() {
+    if (!_formKey.currentState.validate()) {
       return;
     }
 
     String login = _tLogin.text;
     String senha = _tSenha.text;
 
-    print("Login: $login" +
-        " Senha: " +
-        senha); // dá para imprimir variaveis das duas formas
+    print("Login: $login, Senha: $senha");
+
+    push(context, HomePage());
   }
 
-  String _validadeLogin(String text) {
+  String _validateLogin(String text) {
     if (text.isEmpty) {
       return "Digite o login";
     }
     return null;
   }
 
-  String _validadeSenha(String text) {
+  String _validateSenha(String text) {
     if (text.isEmpty) {
       return "Digite a senha";
     }
     if (text.length < 3) {
-      return "A senha precisa conter pelo menos 3 dígitos";
+      return "A senha precisa ter pelo menos 3 números";
     }
     return null;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class AppText extends StatelessWidget {
-  BuildContext context;
   String label;
   String hint;
   bool password;
@@ -13,7 +12,6 @@ class AppText extends StatelessWidget {
   FocusNode nextFocus;
 
   AppText(
-    this.context,
     this.label,
     this.hint, {
     this.password = false,
@@ -39,12 +37,23 @@ class AppText extends StatelessWidget {
           FocusScope.of(context).requestFocus(nextFocus);
         }
       },
+      style: TextStyle(
+        fontSize: 25,
+        color: Colors.blue,
+      ),
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16)
         ),
         labelText: label,
+        labelStyle: TextStyle(
+          fontSize: 25,
+          color: Colors.grey,
+        ),
         hintText: hint,
+        hintStyle: TextStyle(
+          fontSize: 16,
+        ),
       ),
     );
   }
