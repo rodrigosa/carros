@@ -1,10 +1,11 @@
 import 'dart:convert';
 
+import 'package:carros/pages/usuario.dart';
 import 'package:http/http.dart'
     as http; // as http é como se eu estivesse criando uma variável para chamar a lib
 
 class LoginApi {
-  static Future<bool> login(String login, String senha) async {
+  static Future<Usuario> login(String login, String senha) async {
     //var url = Uri(path: 'http://livrowebservices.com.br/rest/login'); http ver 0.13.0
 
     var url = 'https://carros-springboot.herokuapp.com/api/v2/login';
@@ -34,6 +35,8 @@ class LoginApi {
     print("Nome: $nome");
     print("Email: $email");
 
-    return true;
+    final user = Usuario.fromJson(mapResponse);
+
+    return user;
   }
 }
