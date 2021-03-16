@@ -22,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
 
   final _focusSenha = FocusNode();
 
-  //bool _showProgress = false;
+  bool _showProgress = false;
 
   @override
   void initState() {
@@ -38,7 +38,6 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _body() {
-    bool _showProgress = false;
     return Form(
       key: _formKey,
       child: Container(
@@ -87,6 +86,9 @@ class _LoginPageState extends State<LoginPage> {
     String senha = _tSenha.text;
 
     print("Login: $login, Senha: $senha");
+    setState(() {
+      _showProgress = true;
+    });
 
     // push(context, HomePage());
 
@@ -100,6 +102,9 @@ class _LoginPageState extends State<LoginPage> {
     } else {
       alert(context, response.msg);
     }
+    setState(() { // Redesenha toda a tela (Chama o metodo Build novamente)
+      _showProgress = false;
+    });
   }
 
   String _validateLogin(String text) {
