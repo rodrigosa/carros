@@ -5,8 +5,11 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Jurid"),
-      ),
+          title: Center(
+        child: Text(
+          "Jurid",
+        ),
+      )),
       body: _body(),
     );
   }
@@ -14,7 +17,7 @@ class HomePage extends StatelessWidget {
   _body() {
     return Center(
       child: Text(
-        "Rodrigo",
+        "Home",
         style: TextStyle(
           fontSize: 22,
         ),

@@ -30,11 +30,12 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Jurid"),
-      ),
-      body: _body(),
-    );
+        appBar: AppBar(
+          title: Center(
+            child: Text("Jurid")
+          )
+        ),
+        body: _body(),);
   }
 
   _body() {
