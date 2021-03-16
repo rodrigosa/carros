@@ -22,6 +22,8 @@ class _LoginPageState extends State<LoginPage> {
 
   final _focusSenha = FocusNode();
 
+  //bool _showProgress = false;
+
   @override
   void initState() {
     super.initState();
@@ -30,15 +32,13 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Center(
-            child: Text("Jurid")
-          )
-        ),
-        body: _body(),);
+      appBar: AppBar(title: Center(child: Text("Jurid"))),
+      body: _body(),
+    );
   }
 
   _body() {
+    bool _showProgress = false;
     return Form(
       key: _formKey,
       child: Container(
@@ -70,6 +70,7 @@ class _LoginPageState extends State<LoginPage> {
             AppButton(
               "Login",
               onPressed: _onClickLogin,
+              showProgress: _showProgress,
             ),
           ],
         ),
