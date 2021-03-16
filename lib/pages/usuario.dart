@@ -17,7 +17,10 @@ class Usuario {
       : this.login = map["login"],
         this.nome = map["nome"],
         this.email = map["email"],
-        this.token = map["token"];
+        this.token = map["token"],
+        this.roles = map["roles"] != null
+            ? map["roles"].map<String>((role) => role.toString()).toList()
+            : null;
 
   List<String> roles;
 
