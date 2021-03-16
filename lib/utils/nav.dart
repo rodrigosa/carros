@@ -4,9 +4,15 @@ import 'package:flutter/material.dart';
 /// String s recebe parametro passado pelo componente que chama o _onClickNavigator
 /// Sempre que usar await deve se ter o async declarado no metodo
 
-Future push(BuildContext context, Widget page) {
+Future push(BuildContext context, Widget page, {replace = false}) {
+  if (replace) {
+    return Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (BuildContext context) {
+      return page;
+    }));
+  }
   return Navigator.push(context,
       MaterialPageRoute(builder: (BuildContext context) {
-        return page;
-      }));
+    return page;
+  }));
 }
