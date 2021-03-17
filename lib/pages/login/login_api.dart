@@ -1,9 +1,10 @@
 import 'dart:convert';
 
 import 'package:carros/pages/api_response.dart';
-import 'package:carros/pages/usuario.dart';
 import 'package:http/http.dart'
-    as http; // as http é como se eu estivesse criando uma variável para chamar a lib
+    as http;
+
+import 'usuario.dart'; // as http é como se eu estivesse criando uma variável para chamar a lib
 
 class LoginApi {
   static Future<ApiResponse<Usuario>> login(String login, String senha) async {

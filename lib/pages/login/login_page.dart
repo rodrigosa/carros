@@ -1,7 +1,7 @@
 import 'package:carros/pages/api_response.dart';
-import 'package:carros/pages/home_page.dart';
-import 'package:carros/pages/login_api.dart';
-import 'package:carros/pages/usuario.dart';
+import 'package:carros/pages/carro/home_page.dart';
+import 'package:carros/pages/login/login_api.dart';
+import 'package:carros/pages/login/usuario.dart';
 import 'package:carros/utils/alert.dart';
 import 'package:carros/utils/nav.dart';
 import 'package:carros/widgets/app_button.dart';
@@ -16,7 +16,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
 
-  final _tLogin = TextEditingController(text: "rodrigo");
+  final _tLogin = TextEditingController(text: "user");
 
   final _tSenha = TextEditingController(text: "123");
 
