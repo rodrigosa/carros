@@ -63,12 +63,12 @@ class HomePage extends StatelessWidget {
                   children: [
                     Center(
                       child: Image.network(
-                        c.urlFoto,
+                        c.urlFoto ?? "https://s3-sa-east-1.amazonaws.com/videos.livetouchdev.com.br/luxo/Shelby_Supercars_Ultimate.png", // se o valor for nulo ele pega esta url
                         width: 250,
                       ),
                     ),
                     Text(
-                      c.nome,
+                      "${c.nome}", // Desta forma ignora se vier nulo
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(fontSize: 25),

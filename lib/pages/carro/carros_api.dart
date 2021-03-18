@@ -4,17 +4,28 @@ import 'package:http/http.dart' as http;
 
 class CarrosApi {
   static Future<List<Carro>> getCarros() async {
-    try{
+    try {
       var url = 'https://carros-springboot.herokuapp.com/api/v1/carros';
+
+      print("GET > $url");
 
       var response = await http.get(url);
 
-      List mapResponse = json.decode(response.body);
+      List list = json.decode(response.body);
 
-      return [];
+      print(json);
 
-    } catch (error){
-print (error);
+      final carros = List<Carro>();
+
+      for (Map map in list) {
+        Carro c = Carro.fromJson(map);
+
+        carros.add(c);
+      }
+
+      return carros;
+    } catch (error) {
+      print(error);
     }
   }
 }
