@@ -13,15 +13,7 @@ class CarrosApi {
 
       List list = json.decode(response.body);
 
-      print(json);
-
-      final carros = List<Carro>();
-
-      for (Map map in list) {
-        Carro c = Carro.fromJson(map);
-
-        carros.add(c);
-      }
+      final carros = list.map<Carro>((map) => Carro.fromJson(map)).toList();
 
       return carros;
     } catch (error) {
