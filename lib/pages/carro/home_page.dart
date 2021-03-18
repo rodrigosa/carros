@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
           title: Center(
         child: Text(
-          "Jurid",
+          "Carros",
         ),
       )),
       body: _body(),
@@ -25,6 +25,15 @@ class HomePage extends StatelessWidget {
     return FutureBuilder(
       future: future,
       builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          //print(snapshot.error);
+          return Center(
+            child: Text(
+              "Não foi possível buscar os carros!",
+              style: TextStyle(color: Colors.red),
+            ),
+          );
+        }
         if (!snapshot.hasData) {
           return Center(
             child: CircularProgressIndicator(),
