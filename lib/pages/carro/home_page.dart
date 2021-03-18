@@ -1,6 +1,6 @@
 import 'package:carros/drawer_list.dart';
+import 'package:carros/pages/carro/carros_api.dart';
 import 'package:carros/pages/carro/carros_listview.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -23,9 +23,9 @@ class HomePage extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            CarrosListView(),
-            CarrosListView(),
-            CarrosListView()
+            CarrosListView(TipoCarro.classicos),
+            CarrosListView(TipoCarro.esportivos),
+            CarrosListView(TipoCarro.luxo)
           ],
         ),
         drawer: DrawerList(),
