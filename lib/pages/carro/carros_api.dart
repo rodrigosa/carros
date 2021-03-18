@@ -1,8 +1,10 @@
 import 'package:carros/pages/carro/carro.dart';
 
 class CarrosApi {
-  static List<Carro> getCarros(){
+  static Future<List<Carro>> getCarros() async{
     final carros = List<Carro>();
+
+    await Future.delayed(Duration(seconds: 2));
 
     carros.add(Carro(nome: "Shelby Supercars", urlFoto: "https://s3-sa-east-1.amazonaws.com/videos.livetouchdev.com.br/luxo/Shelby_Supercars_Ultimate.png"));
     carros.add(Carro(nome: "Nonaka San", urlFoto: "https://s3-sa-east-1.amazonaws.com/videos.livetouchdev.com.br/luxo/Pagani_Zonda.png"));

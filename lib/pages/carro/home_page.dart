@@ -20,12 +20,28 @@ class HomePage extends StatelessWidget {
   }
 
   _body() {
-    List<Carro> carros = CarrosApi.getCarros();
+    Future<List<Carro>> future = CarrosApi.getCarros();
 
+    return FutureBuilder(
+      future: future,
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        List<Carro> carros = snapshot.data;
+        return _listView(carros);
+      },
+    );
+  }
+
+  Container _listView(List<Carro> carros) {
     return Container(
       padding: EdgeInsets.all(16),
       child: ListView.builder(
-          itemCount: carros.length,
+          itemCount: carros != null ? carros.length : 0,
+          // teste para não dar erro quando no período do await caros estiver nulo
           itemBuilder: (context, index) {
             Carro c = carros[index];
 
@@ -56,13 +72,23 @@ class HomePage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         TextButton(
-                          child: const Text('DETALHES', style: TextStyle(fontSize: 11),),
-                          onPressed: () { /* ... */ },
+                          child: const Text(
+                            'DETALHES',
+                            style: TextStyle(fontSize: 11),
+                          ),
+                          onPressed: () {
+                            /* ... */
+                          },
                         ),
                         const SizedBox(width: 8),
                         TextButton(
-                          child: const Text('SHARE',style: TextStyle(fontSize: 11),),
-                          onPressed: () { /* ... */ },
+                          child: const Text(
+                            'SHARE',
+                            style: TextStyle(fontSize: 11),
+                          ),
+                          onPressed: () {
+                            /* ... */
+                          },
                         ),
                         const SizedBox(width: 8),
                       ],
