@@ -8,33 +8,55 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin <HomePage> { // onde cria as tabs para manter o estado
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin<HomePage> {
+  // onde cria as tabs para manter o estado
+
+  TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 3, vsync: this);
+    _tabController.index = 1;
+    _tabController.addListener(() {
+      print("Tab ${_tabController.index}");
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-            title: Center(
+    return Scaffold(
+      appBar: AppBar(
+        title: Center(
           child: Text(
             "Carros",
           ),
         ),
-        bottom: TabBar(tabs: [
-          Tab(text: "Clássicos",),
-          Tab(text: "Esportivos",),
-          Tab(text: "Luxo",)
-        ],),
-        ),
-        body: TabBarView(
-          children: [
-            CarrosListView(TipoCarro.classicos),
-            CarrosListView(TipoCarro.esportivos),
-            CarrosListView(TipoCarro.luxo)
+        bottom: TabBar(
+          controller: _tabController,
+          tabs: [
+            Tab(
+              text: "Clássicos",
+            ),
+            Tab(
+              text: "Esportivos",
+            ),
+            Tab(
+              text: "Luxo",
+            )
           ],
         ),
-        drawer: DrawerList(),
       ),
+      body: TabBarView(
+        controller: _tabController,
+        children: [
+          CarrosListView(TipoCarro.classicos),
+          CarrosListView(TipoCarro.esportivos),
+          CarrosListView(TipoCarro.luxo)
+        ],
+      ),
+      drawer: DrawerList(),
     );
   }
 }
