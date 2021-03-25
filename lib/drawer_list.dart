@@ -12,7 +12,7 @@ class DrawerList extends StatelessWidget {
             accountName: Text("Rodrigo de Oliveira Sá"),
             accountEmail: Text("rodrigodeoliveirasa@gmail.com"),
             currentAccountPicture: CircleAvatar(
-              backgroundImage: AssetImage("assets/images/user.webp"),
+              backgroundImage: AssetImage("assets/images/user.png"),
             ),
           ),
           ListTile(
