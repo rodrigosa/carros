@@ -16,9 +16,9 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
 
-  final _tLogin = TextEditingController(text: "user");
+  final _tLogin = TextEditingController();
 
-  final _tSenha = TextEditingController(text: "123");
+  final _tSenha = TextEditingController();
 
   final _focusSenha = FocusNode();
 
@@ -27,6 +27,15 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
+    Future<Usuario> future = Usuario.get();
+    future.then((Usuario user) {
+      if (user != null) {
+       /* setState(() {
+          _tLogin.text = user.login;
+        });*/
+        push(context, HomePage(), replace: true);
+      }
+    });
   }
 
   @override
@@ -102,7 +111,8 @@ class _LoginPageState extends State<LoginPage> {
     } else {
       alert(context, response.msg);
     }
-    setState(() { // Redesenha toda a tela (Chama o metodo Build novamente)
+    setState(() {
+      // Redesenha toda a tela (Chama o metodo Build novamente)
       _showProgress = false;
     });
   }
