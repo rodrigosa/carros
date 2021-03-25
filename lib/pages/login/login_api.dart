@@ -1,8 +1,7 @@
 import 'dart:convert';
 
 import 'package:carros/pages/api_response.dart';
-import 'package:http/http.dart'
-    as http;
+import 'package:http/http.dart' as http;
 
 import 'usuario.dart'; // as http é como se eu estivesse criando uma variável para chamar a lib
 
@@ -40,6 +39,11 @@ class LoginApi {
 
       if (response.statusCode == 200) {
         final user = Usuario.fromJson(mapResponse);
+
+        user.save();
+
+        Usuario user2 = await Usuario.get();
+        print("user2: $user2");
 
         return ApiResponse.ok(user);
       }
