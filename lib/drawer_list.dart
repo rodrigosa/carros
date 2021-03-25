@@ -1,19 +1,31 @@
 import 'file:///D:/DevWorkspace/Flutter_devs/carros/lib/pages/login/login_page.dart';
+import 'package:carros/pages/login/usuario.dart';
 import 'package:carros/utils/nav.dart';
 import 'package:flutter/material.dart';
 
 class DrawerList extends StatelessWidget {
+  UserAccountsDrawerHeader _header(Usuario user) {
+    return UserAccountsDrawerHeader(
+      accountName: Text(user.nome),
+      accountEmail: Text(user.email),
+      currentAccountPicture: CircleAvatar(
+        backgroundImage: NetworkImage(user.urlFoto),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    Future<Usuario> future = Usuario.get();
     return Drawer(
       child: ListView(
         children: [
-          UserAccountsDrawerHeader(
-            accountName: Text("Rodrigo de Oliveira Sá"),
-            accountEmail: Text("rodrigodeoliveirasa@gmail.com"),
-            currentAccountPicture: CircleAvatar(
-              backgroundImage: AssetImage("assets/images/user.png"),
-            ),
+          FutureBuilder<Usuario>(
+            future: future,
+            builder: (context, snapshot) {
+              Usuario user = snapshot.data;
+              return user != null ? _header(user) : Container();
+            },
           ),
           ListTile(
             leading: Icon(Icons.star),
