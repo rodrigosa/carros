@@ -1,5 +1,7 @@
 import 'package:carros/pages/carro/carro.dart';
+import 'package:carros/pages/carro/carro_page.dart';
 import 'package:carros/pages/carro/carros_api.dart';
+import 'package:carros/utils/nav.dart';
 import 'package:flutter/material.dart';
 
 class CarrosListView extends StatefulWidget {
@@ -92,9 +94,7 @@ class _CarrosListViewState extends State<CarrosListView>
                             'DETALHES',
                             style: TextStyle(fontSize: 11),
                           ),
-                          onPressed: () {
-                            /* ... */
-                          },
+                          onPressed: () => _onClickCarro(c),
                         ),
                         const SizedBox(width: 8),
                         TextButton(
@@ -115,5 +115,9 @@ class _CarrosListViewState extends State<CarrosListView>
             );
           }),
     );
+  }
+
+  _onClickCarro(Carro c) {
+    push(context, CarroPage(c));
   }
 }
